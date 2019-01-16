@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Spotify Stats</title>
+
+	</div>
+</main>
+
+		{{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
+
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css"/>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css"/>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.6/css/select.dataTables.min.css"/>
+
+		<link rel="stylesheet" href="/public/css/main.css">
+
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/select/1.2.6/js/dataTables.select.min.js"></script>
+	</head>
+	<body>
+		<main>
+			<div class="wrapper">
+				<h1>Spotify Stats</h1>
+				<div id=user-info>
+				<h4>Name: {{display_name}}</h4>
+				<h4>Email: {{email}}</h4>
+				<h4>ID: {{id}}</h4>
+				</div>
+				<br>
+
+				<ul>
+					<li><a href="/search/song">Search</a></li>
+					<li><a href="/private">User Info</a></li>
+					<li><a href="/private/song-list">Your Lists</a></li>
+					<li><a href="/">Logout</a></li>
+				</ul>
+
+				<div id=search>
+				<h3 id>Song Search</h3>
+				<form action="/search/song" method="POST" id="song-search" class="form">
+					<label for="songtitle">Song Title:</label>
+					<input type="text" name="songtitle" id="songtitle">
+					<label for="artist">Artist:</label>
+					<input type="text" name="artist" id="artist">
+					<button type="submit" id="search-button">Search</button>
+				</form>
+
+				<h3>Playlist Search</h3>
+				<form action="/search/playlist" method="POST" id="playlist-search" class="form">
+					<label for="Playlist Title">Playlist Title:</label>
+					<input type="text" name="playlistTitle" id="playlistTitle">
+					<label for="User">User:</label>
+					<input type="text" name="user" id="user">
+					<button type="submit" id="search-button">Search</button>
+				</form>
+				</div>
+			</div>
+		</main>
+	</body>
+

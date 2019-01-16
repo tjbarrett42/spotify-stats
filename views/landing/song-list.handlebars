@@ -1,0 +1,54 @@
+<main>
+	<div class="wrapper">
+		<h1>Spotify Stats</h1>
+		<br>
+
+		<ul>
+			<li><a href="/search/song">Search</a></li>
+			<li><a href="/private">User Info</a></li>
+			<li><a href="/private/song-list">Your Lists</a></li>
+			<li><a href="/">Logout</a></li>
+		</ul>
+		<div id=playlist>
+		<h3>User's Song List</h3>
+        <br>
+
+        <form action="/private/song-analysis" method="POST" id="songs-test">
+
+
+        <form action="/private/song-list" method="POST" id="songs-test">
+
+			{{{song_table}}}
+
+		</form>
+
+		</div>
+
+		
+	</div>
+</main>
+
+<script>
+	$(document).ready(function(){
+		var table = $('#song-list').DataTable({
+			dom: 'Bfrtip',
+			select: true,
+			buttons: [
+				{
+					text: 'Select Songs to Analyze',
+					action: function(){
+						var data = table.rows(['.selected']).data().toArray();
+						var json = {data: data};
+						console.log(json);
+
+						$.post("/private/song-analysis", json, function() {
+							// window.location.replace("/private/song-analysis");
+						}).fail(function() {
+							alert("POST not sent");
+						});
+					}
+				}
+			]
+		});
+	});
+</script>

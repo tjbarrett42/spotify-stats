@@ -1,0 +1,68 @@
+<main>
+	<div class="wrapper">
+		<h1>Spotify Stats</h1>
+		<br>
+
+		<ul>
+			<li><a href="/search/song">Search</a></li>
+			<li><a href="/private">User Info</a></li>
+			<li><a href="/private/song-list">Your Lists</a></li>
+			<li><a href="/">Logout</a></li>
+		</ul>
+		
+		<div id=search>
+		<h3>Song Search</h3>
+		<form action="/search/song" method="POST" id="song-search" class="form">
+			<label for="Song Title">Song Title:</label>
+			<input type="text" name="songtitle" id="songtitle">
+			<label for="Artist">Artist:</label>
+			<input type="text" name="artist" id="artist">
+			<button type="submit" id="search-button">Search</button>
+		</form>
+
+		<h3>Playlist Search</h3>
+		<form action="/search/playlist" method="POST" id="playlist-search" class="form">
+			<label for="Playlist Title">Playlist Title:</label>
+			<input type="text" name="playlistTitle" id="playlistTitle">
+			<label for="User">User:</label>
+			<input type="text" name="user" id="user">
+			<button type="submit" id="search-button">Search</button>
+		</form>
+        <br>
+		</div>
+
+
+		<h3>Search Results:</h3>
+		<form action="/private/song-list" method="POST" id="songs-selected">
+			{{{results_table}}}
+
+		</form>
+        
+		
+	</div>
+</main>
+
+<script>
+	$(document).ready(function(){
+		var table = $('#search-results').DataTable({
+			dom: 'Bfrtip',
+			select: true,
+			buttons: [
+				{
+					text: 'Add Songs to List',
+					action: function(){
+						var data = table.rows(['.selected']).data().toArray();
+						var json = {data: data};
+						console.log(json);
+
+						$.post("/private/song-list", json, function() {
+							window.location.replace("/private/song-list"); // TODO - Maybe add popup instead of redirect?
+						}).fail(function() {
+								alert("POST was not sent");
+							});
+					}
+				}
+			]
+		});
+	});
+</script>
